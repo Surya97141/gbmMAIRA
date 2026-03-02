@@ -1,0 +1,35 @@
+# Virtual environment — never commit
+venv/
+env/
+.venv/
+venv3/
+
+# MAIRA secrets — never commit
+maira/.config.json
+maira/.memory.json
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# VS Code
+.vscode/
+
+# Generated experiment scripts — user's own work
+*/maira/generated/
+
+# MAIRA output files written into user projects
+maira_research_advice.json
+maira_dataset_decisions.json
+maira_report.md
+
+# OS
+.DS_Store
+Thumbs.db

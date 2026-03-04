@@ -184,6 +184,23 @@ def main(scan, about, status, reset):
     print_hyperparam_map(hparam_results)
     save_hyperparam_map(hparam_results, root)
 
+    # ── v0.2 — Reward Curve Diagnosis ─────────────────
+    from curve_diagnosis import (diagnose_curve,
+                                  print_curve_diagnosis,
+                                  save_curve_diagnosis)
+    curve = diagnose_curve(root)
+    print_curve_diagnosis(curve)
+    save_curve_diagnosis(curve, root)
+
+    # If curve is STILL_RISING or COLLAPSED — block benchmarks
+    if curve and curve.shape in ["STILL_RISING", "COLLAPSED"]:
+        schema.experiment_gap = [
+            g for g in schema.experiment_gap
+            if "td3" not in g.lower() and "benchmark" not in g.lower()
+        ]
+
+    # ── Feedback Memory — measure past outcomes ───────
+
     # Only pass READY gaps to advisor and code writer
     ready_gaps = get_ready_gaps(dep_nodes)
     if ready_gaps:

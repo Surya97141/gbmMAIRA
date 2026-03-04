@@ -52,6 +52,13 @@ def scan(path: str):
     parsed       = parse_all(project_scan.result_files, root)
     schema       = detect_schema(project_scan, parsed)
 
+    from dependency_graph import build_dependency_graph, print_dependency_graph, get_ready_gaps
+    dep_nodes  = build_dependency_graph(schema.experiment_gap, root)
+    print_dependency_graph(dep_nodes)
+    ready_gaps = get_ready_gaps(dep_nodes)
+    if ready_gaps:
+        schema.experiment_gap = ready_gaps
+
     # Attach useful attributes for API users
     schema.gaps          = schema.experiment_gap
     schema.scan          = project_scan

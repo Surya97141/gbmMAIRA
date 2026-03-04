@@ -178,7 +178,8 @@ def approval_gate(possibilities: list) -> list:
     print("  MAIRA — Approval Gate")
     print("="*60)
     print("\n  Review the experiments above.")
-    print("  Type numbers to approve (e.g. 1,3 or 'all' or 'none'):")
+    print(f"  Type numbers to approve — valid range: 1 to {len(possibilities)}")
+    print(f"  (e.g. '1' or '1,2' or 'all' or 'none'):")
     print()
 
     while True:

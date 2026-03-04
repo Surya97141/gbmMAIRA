@@ -165,6 +165,35 @@ def main(scan, about, status, reset):
     schema = detect_schema(project_scan, parsed)
     print_schema(schema)
 
+    # ── v0.2 — Dependency Graph ───────────────────────
+    from dependency_graph import (build_dependency_graph,
+                                   print_dependency_graph,
+                                   save_dependency_graph,
+                                   get_ready_gaps)
+    dep_nodes = build_dependency_graph(schema.experiment_gap, root)
+    print_dependency_graph(dep_nodes)
+    save_dependency_graph(dep_nodes, root)
+
+    # ── v0.2 — Hyperparameter Sensitivity Map ─────────
+    from hyperparam_map import (build_hyperparam_map,
+                                 print_hyperparam_map,
+                                 save_hyperparam_map)
+    hparam_results = build_hyperparam_map(
+        root, project_scan.experiment_dirs
+    )
+    print_hyperparam_map(hparam_results)
+    save_hyperparam_map(hparam_results, root)
+
+    # Only pass READY gaps to advisor and code writer
+    ready_gaps = get_ready_gaps(dep_nodes)
+    if ready_gaps:
+        schema.experiment_gap = ready_gaps
+    # If all blocked — keep all gaps so pipeline doesn't break
+    # but warn the user
+    if not ready_gaps:
+        print("  Warning: all gaps blocked by preconditions.")
+        print("  Showing all gaps — fix blockers before running.\n")
+
     # ── Feedback Memory — measure past outcomes ───────
     updates = measure_outcomes(root)
     if updates:

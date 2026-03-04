@@ -15,8 +15,14 @@ MODEL_EXTENSIONS  = {'.zip', '.pt', '.pth', '.h5', '.pkl', '.joblib', '.ckpt'}
 CODE_EXTENSIONS   = {'.py', '.ipynb', '.r', '.R'}
 
 SKIP_DIRS  = {'.git', '__pycache__', 'venv', '.venv', 'node_modules', '.pytest_cache'}
-SKIP_FILES = {'maira_dataset_decisions.json', 'maira_research_advice.json', 'requirements.txt'}
-
+SKIP_FILES = {
+    'maira_dataset_decisions.json',
+    'maira_research_advice.json',
+    'maira_dependency_graph.json',
+    'maira_hyperparam_map.json',
+    'maira_report.md',
+    'requirements.txt',
+}
 
 @dataclass
 class ProjectScan:

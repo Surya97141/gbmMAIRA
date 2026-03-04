@@ -216,7 +216,15 @@ def main(scan, about, status, reset):
     if not ready_gaps:
         print("  Warning: all gaps blocked by preconditions.")
         print("  Showing all gaps — fix blockers before running.\n")
-
+    # ── v0.3 — Auto-detect Completed Runs ─────────────
+    from auto_detect import (auto_detect_completed_runs,
+                              update_memory_with_detections,
+                              print_auto_detect,
+                              save_detection_log)
+    detected = auto_detect_completed_runs(root, schema.experiment_gap)
+    mem_updated = update_memory_with_detections(detected, root)
+    print_auto_detect(detected, mem_updated)
+    save_detection_log(detected, root)
     # ── Feedback Memory — measure past outcomes ───────
     updates = measure_outcomes(root)
     if updates:

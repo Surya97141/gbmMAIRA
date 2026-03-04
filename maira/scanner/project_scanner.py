@@ -20,7 +20,8 @@ SKIP_FILES = {
     'maira_research_advice.json',
     'maira_dependency_graph.json',
     'maira_hyperparam_map.json',
-    'maira_reproducibilty.json'
+    'maira_reproducibilty.json',
+    'maira_detections.json',
     'maira_report.md',
     'requirements.txt',
 }

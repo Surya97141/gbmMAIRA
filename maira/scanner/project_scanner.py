@@ -20,6 +20,7 @@ SKIP_FILES = {
     'maira_research_advice.json',
     'maira_dependency_graph.json',
     'maira_hyperparam_map.json',
+    'maira_reproducibilty.json'
     'maira_report.md',
     'requirements.txt',
 }
@@ -47,11 +48,11 @@ def scan_project(root_path: str) -> ProjectScan:
             scan.all_folders.append(str(rel_dir))
 
         for fname in filenames:
-            if fname in SKIP_FILES:
-                continue
-
             full = Path(dirpath) / fname
             rel  = str(full.relative_to(root))
+
+            if fname in SKIP_FILES or rel.startswith("maira/"):
+                continue
             ext  = full.suffix.lower()
 
             if ext in RESULT_EXTENSIONS:

@@ -199,9 +199,15 @@ def main(scan, about, status, reset):
             if "td3" not in g.lower() and "benchmark" not in g.lower()
         ]
 
-    # ── Feedback Memory — measure past outcomes ───────
+    # ── v0.2 — Reproducibility Score ──────────────────
+    from reproducibility import (compute_reproducibility_score,
+                                  print_reproducibility_score,
+                                  save_reproducibility_score)
+    repro = compute_reproducibility_score(root)
+    print_reproducibility_score(repro)
+    save_reproducibility_score(repro, root)
 
-    # Only pass READY gaps to advisor and code writer
+    # ── Only pass READY gaps to advisor and code writer ─
     ready_gaps = get_ready_gaps(dep_nodes)
     if ready_gaps:
         schema.experiment_gap = ready_gaps

@@ -11,16 +11,59 @@ MAIRA reads your folder structure, result files, and model checkpoints — then 
 
 ## What Makes MAIRA Different
 
-| Capability | Copilot | W&B / MLflow | Devin | MAIRA |
-|---|---|---|---|---|
-| Zero instrumentation required | ✗ | ✗ | ✗ | ✅ |
-| Detects experiment gaps | ✗ | ✗ | ✗ | ✅ |
-| Blocks invalid experiments | ✗ | ✗ | ✗ | ✅ |
-| Reward curve diagnosis | ✗ | partial | ✗ | ✅ |
-| Reproducibility score | ✗ | ✗ | ✗ | ✅ |
-| Auto-detects completed runs | ✗ | requires logging | ✗ | ✅ |
-| Longitudinal research memory | ✗ | ✗ | ✗ | ✅ |
-| Works fully local / offline | ✗ | ✗ | ✗ | ✅ |
+## What Makes MAIRA Different
+
+**Zero instrumentation.** Point MAIRA at any folder — no logging code, no tracking setup, no W&B account.
+```bash
+python maira/cli.py --scan /path/to/any/ml/project
+```
+
+**Blocks invalid experiments before you waste compute.**
+```
+[✗] TD3 never benchmarked against PPO baseline
+      BLOCKED: Evaluation protocol must match across algorithms
+      FIX:     Use same n_eval_episodes, deterministic=True for all algorithms
+```
+
+**Diagnoses your reward curve and tells you what to do.**
+```
+Shape:  ✓  HEALTHY — good
+Steps:  500,000
+Reward: start=3925  peak=3936  final=3671
+→ Curve has converged. Safe to begin benchmarking experiments.
+```
+
+**Scores your research against publication standards — before you submit.**
+```
+Score:  10/14  [██████████████░░░░░░]  Grade: C
+✗ Multiple seed runs missing  — single-seed results are not publishable
+✗ Only 5 eval episodes        — reviewers will ask about this
+✗ No README found             — required for reproducibility
+```
+
+**Automatically closes the feedback loop when experiments complete.**
+```
+[↑ IMPROVED] latency_25ms never tested — gap between 10ms and 50ms
+     File:   logs/metrics/latency_25ms.csv
+     Reward: 3975.800  (delta: +304.517 vs baseline)
+     Memory updated: 1 suggestion marked as complete.
+```
+
+**Remembers everything across runs — longitudinal research memory.**
+```
+Total MAIRA runs:    11
+Improved:             1
+Pending (not run):    2
+Still pending:
+  latency_200ms never tested — upper bound unknown
+  TD3 never benchmarked against PPO baseline
+```
+
+**Works fully local with Ollama — no data leaves your machine.**
+```bash
+ollama pull llama3.2:3b
+python maira/cli.py --scan /path/to/project  # zero internet required
+```
 
 ---
 

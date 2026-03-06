@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="assets/gbmlg.jpeg" width="720" alt="MAIRA — Point · Scan · Discover · Build"/>
-</p>
+<img src="maira/gbmlg.jpeg" width="720" alt="MAIRA — Point · Scan · Discover · Build"/>
 
 # MAIRA — ML Agentic Intelligence for Research Automation
 

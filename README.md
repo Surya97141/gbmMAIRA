@@ -1,6 +1,6 @@
 <img src="maira/gbmlg.jpeg" width="720" alt="MAIRA — Point · Scan · Discover · Build"/>
 
-# MAIRA — ML Agentic Intelligence for Research Automation
+# MAIRA — ML Agentic Intelligence for Research Automation.
 
 > Point. Scan. Discover. Build.
 > Point MAIRA at any ML project folder. No instrumentation needed.

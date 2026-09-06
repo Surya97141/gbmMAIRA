@@ -88,7 +88,7 @@ def generate_report(root: str) -> str:
             lines.append(f"- {j}")
         lines.append("")
 
-    # AI Advice
+    # AI_Advice
     lines += [
         "---",
         "",
